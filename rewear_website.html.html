@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReWear | Your wardrobe, reimagined</title>
+<style>
+:root{
+  --forest:#34483B; --sage:#879581; --cream:#F3EEE4;
+  --terra:#C98E72; --beige:#D5D2B9; --ink:#26342C;
+  --white:#fffdf8; --muted:#68736a; --line:#e4dfd3;
+  --shadow:0 10px 30px rgba(52,72,59,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"Microsoft Sans Serif",Arial,sans-serif;line-height:1.5}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;background:rgba(243,238,228,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{max-width:1180px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-family:Poppins,Arial,sans-serif;font-size:25px;font-weight:800;letter-spacing:-1px;color:var(--forest)}
+.logo span{color:var(--terra)}
+nav{display:flex;gap:7px;flex-wrap:wrap}
+nav a{color:var(--forest);text-decoration:none;font-size:14px;font-weight:700;padding:9px 11px;border-radius:20px}
+nav a:hover,nav a:focus{background:var(--beige)}
+main{max-width:1180px;margin:auto;padding:24px 22px 70px}
+.hero{background:var(--sage);border-radius:22px;padding:42px 44px;display:grid;grid-template-columns:1.35fr .65fr;align-items:center;gap:20px;color:white;min-height:250px;overflow:hidden}
+.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:800;opacity:.9}
+h1,h2,h3{font-family:Poppins,Arial,sans-serif;line-height:1.15;color:var(--forest)}
+.hero h1{font-size:clamp(34px,5vw,54px);margin:10px 0;color:white;letter-spacing:-1.5px}
+.hero p{max-width:570px;margin:0 0 22px;color:#f8f6ef}
+.hero-art{font-size:100px;text-align:center;filter:drop-shadow(0 12px 10px rgba(0,0,0,.12))}
+.btn{border:0;border-radius:12px;padding:11px 17px;background:var(--forest);color:white;font-weight:800;display:inline-block;text-decoration:none}
+.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.btn.light{background:var(--cream);color:var(--forest)}
+.btn.terra{background:var(--terra);color:#fff}
+.section{margin-top:38px;scroll-margin-top:90px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:16px}
+.section-head h2{font-size:27px;margin:0}
+.section-head p{margin:5px 0 0;color:var(--muted);font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feature{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);min-height:165px}
+.feature .emoji{font-size:29px}
+.feature h3{font-size:20px;margin:10px 0 6px}
+.feature p{font-size:14px;color:var(--muted);margin:0 0 15px}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.grid-two{display:grid;grid-template-columns:2fr 1fr;gap:18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{background:var(--cream);border-radius:14px;padding:15px}
+.stat strong{font-family:Poppins,Arial,sans-serif;font-size:27px;color:var(--forest);display:block}
+.stat span{font-size:12px;color:var(--muted)}
+.form-row{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
+input,select{border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px 12px;min-width:0;color:var(--ink)}
+input:focus,select:focus,button:focus,a:focus{outline:3px solid #c98e7270;outline-offset:2px}
+.form-row input,.form-row select{flex:1}
+.item-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:12px;margin-top:16px}
+.garment{border:1px solid var(--line);border-radius:14px;padding:13px;background:#fff}
+.garment .pic{height:90px;border-radius:10px;background:var(--cream);display:grid;place-items:center;font-size:42px;margin-bottom:9px}
+.garment strong{display:block;color:var(--forest)}
+.small{font-size:12px;color:var(--muted)}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.actions button{border:1px solid var(--line);background:var(--cream);border-radius:9px;padding:7px 9px;font-size:12px;color:var(--forest);font-weight:700}
+.actions button:hover{background:var(--beige)}
+.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed var(--beige);border-radius:12px;margin-top:12px}
+.outfit-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.selection-list{display:grid;gap:8px}
+.choice{display:flex;align-items:center;gap:9px;background:var(--cream);border-radius:10px;padding:9px}
+.choice input{min-width:auto}
+.preview{min-height:190px;border:1px dashed var(--beige);border-radius:14px;padding:15px;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:10px}
+.preview-item{background:var(--cream);padding:12px;border-radius:12px;text-align:center;min-width:90px}
+.bar-row{display:grid;grid-template-columns:120px 1fr 35px;gap:10px;align-items:center;margin:12px 0;font-size:13px}
+.bar{height:12px;background:var(--cream);border-radius:20px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--sage);border-radius:20px}
+.care-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.care{background:var(--cream);padding:15px;border-radius:13px}
+.care b{display:block;color:var(--forest);margin:5px 0}
+.impact{background:var(--forest);color:white;border-radius:18px;padding:24px}
+.impact h2{color:white;margin-top:0}
+.impact p{color:#e6e9e2}
+.impact .stat{background:#ffffff16}
+.impact .stat strong{color:#fff}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px 10px}
+.notice{font-size:12px;color:var(--muted);margin-top:10px}
+.hidden{display:none!important}
+@media(max-width:760px){
+ .nav{align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr;padding:30px 24px}.hero-art{display:none}
+ .cards{grid-template-columns:1fr}.grid-two,.outfit-layout{grid-template-columns:1fr}
+ .care-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:1fr 1fr}
+ nav{gap:2px}nav a{font-size:12px;padding:7px}
+}
+@media(max-width:420px){main{padding-left:14px;padding-right:14px}.care-grid{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}.hero h1{font-size:36px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="logo" href="#home" aria-label="ReWear home">re<span>wear</span>.</a>
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a><a href="#wardrobe">My Wardrobe</a><a href="#outfits">Outfit Creator</a><a href="#tracker">Wear Tracker</a><a href="#care">Clothing Care</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero" id="home">
+    <div>
+      <div class="eyebrow">Wear what you have • Love it longer</div>
+      <h1>Your wardrobe.<br>A greener tomorrow.</h1>
+      <p>Rediscover the clothes you already own, try new combinations and make every garment count.</p>
+      <a class="btn light" href="#wardrobe">Explore my wardrobe →</a>
+    </div>
+    <div class="hero-art" aria-hidden="true">♻️👕</div>
+  </section>
+
+  <section class="section" aria-labelledby="features-title">
+    <div class="section-head"><div><h2 id="features-title">A little more from what you own</h2><p>Everything you need to make more of your existing wardrobe.</p></div></div>
+    <div class="cards">
+      <article class="feature"><div class="emoji">🧥</div><h3>My Wardrobe</h3><p>Add and organise garments so forgotten pieces are easier to find.</p><a class="btn" href="#wardrobe">Open wardrobe</a></article>
+      <article class="feature"><div class="emoji">✨</div><h3>Outfit Creator</h3><p>Mix pieces you already own and save combinations you like.</p><a class="btn" href="#outfits">Create an outfit</a></article>
+      <article class="feature"><div class="emoji">📊</div><h3>Wear Tracker</h3><p>Record wears and notice which pieces could use more attention.</p><a class="btn" href="#tracker">Track my clothes</a></article>
+    </div>
+  </section>
+
+  <section class="section" id="wardrobe">
+    <div class="section-head"><div><h2>My Wardrobe</h2><p>Your digital clothing inventory. Add a few sample items or enter your own.</p></div></div>
+    <div class="panel">
+      <form id="addForm">
+        <div class="form-row">
+          <input id="itemName" maxlength="35" placeholder="Garment name (e.g. White shirt)" required aria-label="Garment name">
+          <select id="itemCategory" aria-label="Garment category"><option>Tops</option><option>Bottoms</option><option>Dresses</option><option>Outerwear</option><option>Shoes</option><option>Accessories</option></select>
+          <select id="itemEmoji" aria-label="Garment icon"><option value="👕">👕 Top</option><option value="👖">👖 Bottom</option><option value="👗">👗 Dress</option><option value="🧥">🧥 Outerwear</option><option value="👟">👟 Shoes</option><option value="👜">👜 Accessory</option></select>
+          <button class="btn" type="submit">+ Add item</button>
+        </div>
+      </form>
+      <div class="form-row">
+        <input id="searchItems" placeholder="Search your wardrobe..." aria-label="Search garments">
+        <select id="filterCategory" aria-label="Filter by category"><option value="All">All categories</option><option>Tops</option><option>Bottoms</option><option>Dresses</option><option>Outerwear</option><option>Shoes</option><option>Accessories</option></select>
+      </div>
+      <div id="wardrobeGrid" class="item-grid"></div>
+      <p class="notice">Demo note: your entries are saved in this browser on this device. Avoid entering private or identifying information.</p>
+    </div>
+  </section>
+
+  <section class="section" id="outfits">
+    <div class="section-head"><div><h2>Outfit Creator</h2><p>Select garments from your wardrobe to build a new combination.</p></div></div>
+    <div class="panel outfit-layout">
+      <div><h3>Choose your pieces</h3><div id="outfitChoices" class="selection-list"></div></div>
+      <div><h3>Your outfit preview</h3><div id="outfitPreview" class="preview"><span class="small">Choose garments to see them here.</span></div><div class="form-row"><input id="outfitName" placeholder="Name this outfit" maxlength="30" aria-label="Outfit name"><button id="saveOutfit" class="btn" type="button">Save outfit</button></div><div id="savedOutfits" class="small"></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="tracker">
+    <div class="section-head"><div><h2>Wear Tracker</h2><p>Log each time you wear an item and review your recorded usage.</p></div></div>
+    <div class="panel">
+      <div class="stats">
+        <div class="stat"><strong id="totalItems">0</strong><span>Garments in wardrobe</span></div>
+        <div class="stat"><strong id="totalWears">0</strong><span>Recorded wears</span></div>
+        <div class="stat"><strong id="unusedItems">0</strong><span>Not yet recorded as worn</span></div>
+      </div>
+      <h3 style="margin-top:24px">Garment usage</h3>
+      <div id="wearBars"></div>
+      <div id="unusedList" class="notice"></div>
+    </div>
+  </section>
+
+  <section class="section grid-two" id="care">
+    <div class="panel">
+      <div class="section-head"><div><h2>Clothing Care</h2><p>Small habits can help clothes stay in use for longer.</p></div></div>
+      <div class="care-grid">
+        <div class="care"><span>🫧</span><b>Wash thoughtfully</b><span class="small">Follow garment labels and wash only when needed.</span></div>
+        <div class="care"><span>🧺</span><b>Store carefully</b><span class="small">Fold or hang items appropriately and keep them dry.</span></div>
+        <div class="care"><span>🪡</span><b>Repair</b><span class="small">Mend small tears or loose buttons where possible.</span></div>
+        <div class="care"><span>🔁</span><b>Reuse</b><span class="small">Restyle, swap or pass on wearable clothing.</span></div>
+      </div>
+    </div>
+    <aside class="impact">
+      <div class="eyebrow">Make your habits visible</div>
+      <h2>Your wardrobe, in use</h2>
+      <p>Track what you wear and use your wardrobe insights to rediscover pieces you already own.</p>
+      <div class="stats">
+        <div class="stat"><strong id="impactItems">0</strong><span>Items added</span></div>
+        <div class="stat"><strong id="impactWears">0</strong><span>Wears logged</span></div>
+      </div>
+      <p class="notice" style="color:#e6e9e2">These are personal activity counts, not measured carbon or water savings.</p>
+    </aside>
+  </section>
+  <footer>ReWear · More use. Less waste. A smarter wardrobe.</footer>
+</main>
+<script>
+const KEY="rewear_demo_v1";
+const starter=[
+ {id:1,name:"White shirt",category:"Tops",emoji:"👕",wears:2},
+ {id:2,name:"Blue jeans",category:"Bottoms",emoji:"👖",wears:4},
+ {id:3,name:"Everyday trainers",category:"Shoes",emoji:"👟",wears:1},
+ {id:4,name:"Light jacket",category:"Outerwear",emoji:"🧥",wears:0}
+];
+let data;
+try{data=JSON.parse(localStorage.getItem(KEY))||null}catch(e){data=null}
+if(!data)data={items:starter,outfits:[]};
+const $=id=>document.getElementById(id);
+function persist(){localStorage.setItem(KEY,JSON.stringify(data));render()}
+function renderWardrobe(){
+ const q=$("searchItems").value.toLowerCase(),cat=$("filterCategory").value;
+ const list=data.items.filter(x=>(cat==="All"||x.category===cat)&&x.name.toLowerCase().includes(q));
+ $("wardrobeGrid").innerHTML=list.length?list.map(x=>`<article class="garment"><div class="pic">${x.emoji}</div><strong>${escapeHTML(x.name)}</strong><div class="small">${x.category} · ${x.wears} recorded wears</div><div class="actions"><button type="button" onclick="logWear(${x.id})">+ Log wear</button><button type="button" onclick="removeItem(${x.id})">Remove</button></div></article>`).join(""):`<div class="empty">No garments match. Add an item or change your filters.</div>`;
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderOutfits(){
+ $("outfitChoices").innerHTML=data.items.length?data.items.map(x=>`<label class="choice"><input type="checkbox" value="${x.id}" onchange="updatePreview()"> <span>${x.emoji}</span> ${escapeHTML(x.name)}</label>`).join(""):`<div class="empty">Add garments to My Wardrobe first.</div>`;
+ updatePreview();
+ $("savedOutfits").innerHTML=data.outfits.length?`<b>Saved outfits:</b> ${data.outfits.map(x=>escapeHTML(x.name)).join(" · ")}`:"No saved outfits yet.";
+}
+function updatePreview(){
+ const selected=[...document.querySelectorAll("#outfitChoices input:checked")].map(c=>data.items.find(x=>x.id===Number(c.value))).filter(Boolean);
+ $("outfitPreview").innerHTML=selected.length?selected.map(x=>`<div class="preview-item"><div style="font-size:34px">${x.emoji}</div><div class="small">${escapeHTML(x.name)}</div></div>`).join(""):`<span class="small">Choose garments to see them here.</span>`;
+}
+function renderTracker(){
+ const total=data.items.reduce((s,x)=>s+x.wears,0),unused=data.items.filter(x=>x.wears===0);
+ $("totalItems").textContent=data.items.length;$("totalWears").textContent=total;$("unusedItems").textContent=unused.length;
+ $("impactItems").textContent=data.items.length;$("impactWears").textContent=total;
+ const max=Math.max(1,...data.items.map(x=>x.wears));
+ $("wearBars").innerHTML=data.items.length?data.items.map(x=>`<div class="bar-row"><span>${escapeHTML(x.name)}</span><div class="bar"><span style="width:${x.wears/max*100}%"></span></div><b>${x.wears}</b></div>`).join(""):`<div class="empty">Add garments to begin tracking.</div>`;
+ $("unusedList").textContent=unused.length?`Not yet recorded as worn: ${unused.map(x=>x.name).join(", ")}`:"All listed garments have at least one recorded wear.";
+}
+function render(){renderWardrobe();renderOutfits();renderTracker()}
+$("addForm").addEventListener("submit",e=>{e.preventDefault();const name=$("itemName").value.trim();if(!name)return;data.items.push({id:Date.now(),name,category:$("itemCategory").value,emoji:$("itemEmoji").value,wears:0});$("itemName").value="";persist()});
+$("searchItems").addEventListener("input",renderWardrobe);
+$("filterCategory").addEventListener("change",renderWardrobe);
+$("saveOutfit").addEventListener("click",()=>{const ids=[...document.querySelectorAll("#outfitChoices input:checked")].map(x=>Number(x.value));if(!ids.length){alert("Choose at least one garment first.");return}const name=$("outfitName").value.trim()||`Outfit ${data.outfits.length+1}`;data.outfits.push({name,ids});$("outfitName").value="";persist()});
+function logWear(id){const item=data.items.find(x=>x.id===id);if(item){item.wears++;persist()}}
+function removeItem(id){if(!confirm("Remove this garment from your demo wardrobe?"))return;data.items=data.items.filter(x=>x.id!==id);data.outfits=data.outfits.filter(o=>o.ids.every(i=>i!==id));persist()}
+render();
+</script>
+</body>
+</html>
